@@ -1,0 +1,57 @@
+FROM node:lts
+USER root
+
+# base packages
+RUN apt-get update && apt-get install -y \
+    asciinema \
+    build-essential \
+    chromium \
+    curl \
+    dbus \
+    dbus-user-session \
+    file \
+    git \
+    jq \
+    procps \
+    sqlite3 \
+    tmux \
+    xauth \
+    xvfb \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+
+# homebrew dir
+RUN mkdir -p /home/linuxbrew/.linuxbrew && chown -R node:node /home/linuxbrew
+
+# non-root user
+USER node
+ENV USER=node
+
+# install homebrew
+RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}"
+
+# homebrew packages
+RUN brew install gh go
+
+# start script with bootstrap
+USER root
+RUN cat >/start.sh <<EOF
+#!/bin/bash
+[ -d "/home/node/.openclaw" ] || {
+    npm config set prefix /home/node/npm;
+    npm i -g openclaw@latest clawhub mcporter awslabs.openapi-mcp-server;
+    curl -fsSL https://cli.kiro.dev/install | bash;
+}
+
+dbus-daemon --session --fork --address=unix:path=/tmp/dbus-session.sock
+openclaw gateway
+EOF
+
+RUN chmod 777 /start.sh
+USER node
+
+# npm bin path
+ENV PATH="/home/node/npm/bin:/home/node/.local/bin:${PATH}"
+
+ENTRYPOINT /start.sh

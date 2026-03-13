@@ -1,0 +1,51 @@
+volumes:
+  kiro:
+  openclaw:
+
+networks:
+  default:
+    driver: bridge
+  proxy:
+    external: true
+  
+services:
+  openclaw:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    depends_on: [kiro]
+    image: openclaw
+    container_name: openclaw
+    restart: unless-stopped
+    user: "node:node"
+    ports:
+      - "127.0.0.1:18793:18793"
+    volumes:
+      - openclaw:/home/node
+    environment:
+      DBUS_SESSION_BUS_ADDRESS: "unix:path=/tmp/dbus-session.sock"
+      NODE_ENV: "production"
+      OPENCLAW_CONFIG_DIR: "/home/node/.openclaw"
+      OPENCLAW_GIT_DIR: "/home/node/openclaw"
+      OPENCLAW_WORKSPACE_DIR: "/home/node/.openclaw/workspace"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ai.entrypoints=websecure"
+      - "traefik.http.routers.ai.rule=Host(`ai.home.arpa`)"
+      - "traefik.http.routers.ai.service=ai"
+      - "traefik.http.routers.ai.tls=true"
+      - "traefik.http.routers.ai.tls.certresolver=home_dot_arpa"
+      - "traefik.http.services.ai.loadbalancer.server.port=18789"
+    networks: [proxy, default]
+  kiro:
+    build:
+      dockerfile: kiro.Dockerfile
+      context: .
+    image: kiro-gateway
+    container_name: kiro
+    restart: unless-stopped
+    user: "kiro:kiro"
+    volumes:
+      - kiro:/home/kiro
+    networks: [default]
+
