@@ -38,10 +38,9 @@ RUN brew install gh go
 USER root
 RUN cat >/start.sh <<EOF
 #!/bin/bash
-[ -d "/home/node/.openclaw" ] || {
+[ -f "/home/node/.npmrc" ] || {
     npm config set prefix /home/node/npm;
     npm i -g openclaw@latest clawhub mcporter awslabs.openapi-mcp-server;
-    curl -fsSL https://cli.kiro.dev/install | bash;
 }
 
 dbus-daemon --session --fork --address=unix:path=/tmp/dbus-session.sock
