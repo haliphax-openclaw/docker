@@ -23,19 +23,7 @@ RUN apt-get update && apt-get install -y \
 # homebrew dir
 RUN mkdir -p /home/linuxbrew/.linuxbrew && chown -R node:node /home/linuxbrew
 
-# non-root user
-USER node
-ENV USER=node
-
-# install homebrew
-RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}"
-
-# homebrew packages
-RUN brew install gh go
-
-# start script with bootstrap
-USER root
+# entry point script with bootstrap
 RUN cat >/start.sh <<EOF
 #!/bin/bash
 [ -f "/home/node/.npmrc" ] || {
@@ -48,9 +36,16 @@ openclaw gateway
 EOF
 
 RUN chmod 777 /start.sh
-USER node
 
-# npm bin path
-ENV PATH="/home/node/npm/bin:/home/node/.local/bin:${PATH}"
+# non-root user
+USER node
+ENV USER=node
+
+# install homebrew
+RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+ENV PATH="/home/node/npm/bin:/home/node/.local/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}"
+
+# homebrew packages
+RUN brew install gh go
 
 ENTRYPOINT /start.sh

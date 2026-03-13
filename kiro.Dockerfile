@@ -9,7 +9,7 @@ RUN apk add -U bash curl git
 RUN addgroup -S kiro && adduser -S -D -u 1000 -G kiro kiro
 WORKDIR /home/kiro
 
-# bootstrap script
+# entry point script with bootstrap
 RUN cat >/main.sh <<EOF
 #!/bin/bash
 [ -f "/home/kiro/.bashrc" ] || {
@@ -30,6 +30,7 @@ EOF
 
 RUN chmod 777 /main.sh && chown -R kiro:kiro /home/kiro
 
+# non-root user
 USER kiro
 
 ENTRYPOINT /main.sh
