@@ -22,7 +22,6 @@ Note: You will need a separate model for memory search that supports embeddings.
 - `jq` - Parse and manipulate JSON data
 - `sqlite3` - Access SQLite databases
 - `tmux` - Headless PTY sessions that agents can control, even in kludge mode
-- `xvfb` - Virtual framebuffer for apps that expect an attached screen
 
 ## Kiro Gateway
 
