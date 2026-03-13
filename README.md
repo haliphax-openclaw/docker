@@ -12,6 +12,18 @@ Note: You will need a separate model for memory search that supports embeddings.
 - A D-bus user session manager is started before the OpenClaw gateway
 - OpenClaw is executed as a non-root user
 
+### Extras
+
+- `awslabs.openapi-mcp-server` - Make MCP servers from OpenAPI spec docs on the fly
+- `asciinema` - Record terminal transcript sessions as videos and upload to https://asciinema.org
+- `chromium` - Chromium browser, able to headlessly control browser sessions
+- `dbus-user-session` - Provides a user-level D-bus session
+- `gh` - GitHub command line tool
+- `jq` - Parse and manipulate JSON data
+- `sqlite3` - Access SQLite databases
+- `tmux` - Headless PTY sessions that agents can control, even in kludge mode
+- `xvfb` - Virtual framebuffer for apps that expect an attached screen
+
 ## Kiro Gateway
 
 - Uses the [kiro-gateway][] project to serve kiro desktop models via an OpenAI-compatible API
