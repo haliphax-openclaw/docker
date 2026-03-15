@@ -29,10 +29,9 @@ Note: You will need a separate model for memory search that supports embeddings.
 - Uses the [kiro-gateway][] project to serve Kiro desktop models via an OpenAI-compatible API
 - First container startup will run the bootstrap script, and then you must use `kiro-cli login` to provide credentials
   - Fire up a shell session with `docker compose exec -it --entrypoint /bin/bash kiro`
-  - Run the `kiro-cli login --use-device-flow` command
+  - Run the `kiro-cli login --use-device-flow &` command in the background
   - Visit the provided link
-  - Fire up a second shell session
-  - Visit the callback URL in the second session with `curl`
+  - Visit the callback URL with `curl`
 - Subsequent container init should load the Kiro gateway successfully
 
 ### Alternate login method
