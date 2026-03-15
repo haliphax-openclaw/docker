@@ -12,6 +12,8 @@ WORKDIR /home/kiro
 # entry point script with bootstrap
 RUN cat >/main.sh <<EOF
 #!/bin/bash
+set -eo pipefail
+
 [ -f "/home/kiro/.bashrc" ] || {
     cd /home/kiro;
     echo 'PATH="\$HOME/.local/bin:\$PATH"' >> .bashrc;
@@ -20,7 +22,6 @@ RUN cat >/main.sh <<EOF
     cd kiro-gateway;
     uv venv;
     uv pip install -r requirements.txt;
-    exit \$!;
 }
 
 cd /home/kiro/kiro-gateway

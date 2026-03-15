@@ -25,6 +25,8 @@ RUN mkdir -p /home/linuxbrew/.linuxbrew && chown -R node:node /home/linuxbrew
 # entry point script with bootstrap
 RUN cat >/start.sh <<EOF
 #!/bin/bash
+set -eo pipefail
+
 [ -f "/home/node/.npmrc" ] || {
     npm config set prefix /home/node/npm;
     npm i -g openclaw@latest clawhub mcporter awslabs.openapi-mcp-server;
