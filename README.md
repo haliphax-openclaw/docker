@@ -38,7 +38,11 @@ Note: You will need a separate model for memory search that supports embeddings.
 
 You can copy the contents of your `~/.local/share/kiro-cli/data.sqlite3` file into the volume used by the container after you've logged in using a Kiro Desktop installation.
 
+## Traefik
+
+This setup assumes you have an external docker network, `proxy`, that the [Traefik][] proxy is attached to. Yank out all the custom network configuration and the docker labels if you have a different stack.
+
 [kiro]: https://kiro.dev
 [kiro-gateway]: https://github.com/jwadow/kiro-gateway
-
+[traefik]: https://traefik.io/traefik
 
