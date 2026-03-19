@@ -46,7 +46,7 @@ You will need to clone the repository into the docker volume being mounted into 
 
 ## Traefik
 
-This setup assumes you have an external docker network, `proxy`, that the [Traefik][] proxy is attached to. Yank out all the custom network configuration and the docker labels if you have a different stack.
+This setup assumes you have an external docker network, `proxy`, that the [Traefik][] proxy is attached to. Yank out all the custom network configuration and the docker labels if you have a different stack. You will also need to configure your own TLS resolver (mine is `home_dot_arpa` in my Traefik config).
 
 [kiro]: https://kiro.dev
 [kiro-gateway]: https://github.com/jwadow/kiro-gateway
