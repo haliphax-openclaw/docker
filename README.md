@@ -1,6 +1,6 @@
 # OpenClaw docker setup
 
-This is my docker and docker compose setup for OpenClaw with an API-compatible gateway for [Kiro][], which allows the use of Anthropic models, minimax-m2.1, etc. using Kiro's affordable pro plan rather than pay-as-you-go rates from Google, Amazon Bedrock, etc.
+This is my docker and docker compose setup for OpenClaw with an API-compatible gateway for [Kiro][], which allows the use of Anthropic models, minimax-m2.1, etc. using Kiro's affordable pro plan rather than pay-as-you-go rates from Google, Amazon Bedrock, etc.I have also included my own [openclaw-canvas-web][] server for agent-driven web UIs.
 
 Note: You will need a separate model for memory search that supports embeddings. Its usage costs should be negligible. I am currently using `gemini/gemini-embedding-001` via the Google AI free preview.
 
@@ -38,11 +38,16 @@ Note: You will need a separate model for memory search that supports embeddings.
 
 You can copy the contents of your `~/.local/share/kiro-cli/data.sqlite3` file into the volume used by the container after you've logged in using a Kiro Desktop installation.
 
+## Canvas web server
+
+The [openclaw-canvas-web][] server is being served at `/canvas`, with individual agent sessions available at `/canvas/session/<agent>` (example: `/canvas/session/main`). Agents should be able to use this server with the accompanying skill in order to build reactive web interfaces.
+
 ## Traefik
 
 This setup assumes you have an external docker network, `proxy`, that the [Traefik][] proxy is attached to. Yank out all the custom network configuration and the docker labels if you have a different stack.
 
 [kiro]: https://kiro.dev
 [kiro-gateway]: https://github.com/jwadow/kiro-gateway
+[openclaw-canvas-web]: https://github.com/haliphax-openclaw/openclaw-canvas-web
 [traefik]: https://traefik.io/traefik
 

@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     dbus \
     dbus-user-session \
     file \
+    fonts-noto-color-emoji \
     git \
     jq \
     procps \
