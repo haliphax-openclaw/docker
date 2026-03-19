@@ -42,6 +42,8 @@ You can copy the contents of your `~/.local/share/kiro-cli/data.sqlite3` file in
 
 The [openclaw-canvas-web][] server is being served at `/canvas`, with individual agent sessions available at `/canvas/session/<agent>` (example: `/canvas/session/main`). Agents should be able to use this server with the accompanying skill in order to build reactive web interfaces.
 
+You will need to clone the repository into the docker volume being mounted into the container. The default location is `/home/node/openclaw-canvas-web`.
+
 ## Traefik
 
 This setup assumes you have an external docker network, `proxy`, that the [Traefik][] proxy is attached to. Yank out all the custom network configuration and the docker labels if you have a different stack.
