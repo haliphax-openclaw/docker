@@ -1,6 +1,6 @@
 # OpenClaw docker setup
 
-This is my docker and docker compose setup for OpenClaw with an API-compatible gateway for [Kiro][], which allows the use of Anthropic models, minimax-m2.1, etc. using Kiro's affordable pro plan rather than pay-as-you-go rates from Google, Amazon Bedrock, etc.I have also included my own [openclaw-canvas-web][] server for agent-driven web UIs.
+This is my docker and docker compose setup for OpenClaw with an API-compatible gateway for [Kiro][], which allows the use of Anthropic models, minimax-m2.1, etc. using Kiro's affordable pro plan rather than pay-as-you-go rates from Google, Amazon Bedrock, and other providers. I have also included my own [openclaw-canvas-web][] server for agent-driven web UIs.
 
 Note: You will need a separate model for memory search that supports embeddings. Its usage costs should be negligible. I am currently using `gemini/gemini-embedding-001` via the Google AI free preview.
 
@@ -22,6 +22,7 @@ Note: You will need a separate model for memory search that supports embeddings.
 - `jq` - Parse and manipulate JSON data
 - `sqlite3` - Access SQLite databases
 - `tmux` - Headless PTY sessions that agents can control, even in kludge mode
+- `vim-tiny` - Edit files while in the container shell
 - `wordnet` - Dictionary, thesaurus, and more
 
 ## Kiro Gateway

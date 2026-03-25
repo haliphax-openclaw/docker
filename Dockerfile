@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
     procps \
     sqlite3 \
     tmux \
+    vim-tiny \
     wordnet \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
@@ -50,4 +51,4 @@ ENV PATH="/home/node/npm/bin:/home/node/.local/bin:/home/linuxbrew/.linuxbrew/bi
 # homebrew packages
 RUN brew install gh go
 
-ENTRYPOINT /start.sh
+ENTRYPOINT ["/start.sh"]

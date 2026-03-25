@@ -34,5 +34,5 @@ RUN chmod 777 /main.sh && chown -R kiro:kiro /home/kiro
 # non-root user
 USER kiro
 
-ENTRYPOINT /main.sh
+ENTRYPOINT ["/main.sh"]
 
