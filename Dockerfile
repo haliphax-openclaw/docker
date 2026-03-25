@@ -31,7 +31,7 @@ set -eo pipefail
 
 [ -f "/home/node/.npmrc" ] || {
     npm config set prefix /home/node/npm;
-    npm i -g openclaw@latest clawhub mcporter awslabs.openapi-mcp-server;
+    npm i -g openclaw@2026.3.11 clawhub mcporter awslabs.openapi-mcp-server;
 }
 
 dbus-daemon --session --fork --address=unix:path=/tmp/dbus-session.sock
