@@ -18,7 +18,8 @@ services:
     container_name: openclaw
     restart: unless-stopped
     ports:
-      - "127.0.0.1:18793:18793"
+      - "127.0.0.1:18792:18792" # browser relay
+      - "127.0.0.1:18793:18793" # gateway
     volumes:
       - openclaw:/home/node
     environment:
