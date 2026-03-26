@@ -9,6 +9,7 @@ set -eo pipefail
 [ -d "/home/node/openclaw-canvas-web/dist" ] || {
     npm config set prefix /home/node/npm;
     cd /home/node/openclaw-canvas-web;
+    npm run clean || true;
     npm run setup;
     VITE_BASE=/canvas/ npm run build;
 }
